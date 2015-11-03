@@ -24,40 +24,20 @@ function Brick() {
 				this.colour);
 	}
 
-	this.Break = function(deleteFunc) {
-		this.isBroken = true;
+	this.DrawBreak = function(){
+		this.rect.x--;
+		this.rect.y--;
+		this.rect.w+=2;
+		this.rect.h+=2;
 
-		var i = 10;
-		var self = this;
+		window.requestAnimationFrame(this.DrawBreak.call(this));
+	}
 
-		// this has to be saved as 'this' changes
-		//	when in the generator
-		// i, deleteFunc and self are saved in BreakAnimators state
-		var BreakAnimator = function() {
-			self.rect.x--;
-			self.rect.y--;
-			self.rect.w+=2;
-			self.rect.h+=2;
-
-			// i--;
-
-			// if(i <= 0) {
-			// 	// Delete self
-			// 	// deleteFunc(self);
-			// }else{
-			// 	// Queue next animation
-			// 	setTimeout(BreakAnimator, 100);				
-			// }
+	this.Break = function() {
+		if(!this.isBroken) {
+			this.isBroken = true;
 		}
 
-		function CurryTest(a, b) {
-			console.log("CurryTest");
-			console.log(a);
-			console.log(b);
-		}
-		Calculus.Curry(CurryTest, 1)(5);
-
-		// Start animation
-		BreakAnimator();
+		// window.requestAnimationFrame(this.DrawBreak.call(this));
 	}
 }

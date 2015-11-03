@@ -47,10 +47,15 @@ function Ball(){
 	this.CollideBrick = function(brick, deleteFunc){
 		if(Physics.CircleRectIntersect(this.c, brick.rect)){
 
-			brick.Break(deleteFunc);
-			setTimeout(Calculus.Curry(deleteFunc, brick), 10000);
+			if(typeof(deleteFunc) == "function"){
+				setTimeout(function(){
+					deleteFunc.call(brick);
+				}, 1000);
+				brick.Break.call(brick);
+			}
 
-			var adjChecks = true;
+
+			// var adjChecks = true;
 
 			if((this.c.x < brick.rect.x && this.vX > 0)|| (this.c.x > brick.rect.x + brick.rect.w && this.vX < 0)){
 				this.vX *= -1;

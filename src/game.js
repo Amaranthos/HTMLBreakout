@@ -12,7 +12,7 @@ const paddleHeight = 15;
 const paddlePadding = 20;
 
 var canvas, canvasContext;
-var clearColour = "black";
+var clearColour = "rgba(0,0,0,1)";
 
 var ball = new Ball();
 var paddle = new Paddle();
@@ -53,7 +53,6 @@ function Update() {
 		ball.CollideBrick(bricks[i], function(){
 			bricks.splice(i,1);
 			i--;
-			console.log("Break");
 		});
 	}
 
@@ -81,6 +80,7 @@ function SpawnBricks() {
 }
 
 function Clear(){
+	// canvasContext.clearRect(0, 0, canvas.width, canvas.height);
 	Drawing.Rect(0,0, canvas.width, canvas.height, clearColour);
 }
 
